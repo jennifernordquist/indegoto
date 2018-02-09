@@ -14,8 +14,7 @@ html, body, #app {
 }
 
 .gm-style-iw {
-  margin-right: -1em;
-  margin-left: -1em;
+  /**/
 }
 
 /* hide close button on infowindows */

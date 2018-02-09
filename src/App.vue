@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MapComponent msg="This is City Hall" :given-address='center'/>
+    <MapComponent msg="This is City Hall" :given-address='center' :num-stations='numberOfStations'/>
   </div>
 </template>
 
@@ -18,7 +18,9 @@ export default {
         lat: 39.9524,
         latitude: 39.9524,
         lng: -75.1636,
-        longitude: -75.1636}
+        longitude: -75.1636
+      },
+      numberOfStations: 3
     }
   }
 }

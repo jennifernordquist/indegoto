@@ -1,7 +1,7 @@
 <template>
   <gmap-map
   :center="center"
-  :zoom="16"
+  :zoom="17"
   style="width: 100%; height: 100%"
   v-if="stations.length > 0"
   > 
@@ -12,7 +12,7 @@
   @g-click="center=givenAddress"
   ></gmap-marker>
   <gmap-info-window
-  v-for="(s, index) in stations"
+  v-for="(s, index) in shownStations"
   :position="s.geometry.position"
   :opened="true"
   >
@@ -58,11 +58,13 @@ export default {
   props: {
     msg: String,
     bikeData: Object,
-    givenAddress: Object
+    givenAddress: Object,
+    numStations: Number
   },
   data () {
     return {
-      center: this.givenAddress
+      center: this.givenAddress,
+      shownStations: []
     }
   },
   asyncComputed: {
@@ -86,12 +88,42 @@ export default {
               }
               station.geometry.distance = Haversine(self.givenAddress, station.geometry.position, {unit: 'mile'});
             })
+            data.sort(function(a, b) {
+              if(a.geometry.distance < b.geometry.distance) {
+                return -1;
+              }
+              else if(a.geometry.distance === b.geometry.distance) {
+                return 0;
+              }
+              else {
+                return 1;
+              }
+            });
+            self.shownStations = data.slice(0, self.numStations);
             console.log(data);
             return data;
           })
       },
       default: []
     }
+  },
+  methods: {
+    getBounds: function () {
+      var bounds = {
+        north: 40,
+        east: -75,
+        south: 39,
+        west: -76
+      }
+      return new window.google.maps.LatLngBounds(new google.maps.LatLng(bounds.south, bounds.west), new google.maps.LatLng(bounds.north, bounds.east));
+    }
+  },
+  updated () {
+    console.log(this.$children[0]);
+    var self = this;
+    this.$children[0].$mapCreated.then(function (){
+      self.$children[0].fitBounds(self.getBounds()) 
+    });
   }
 }
 </script>
