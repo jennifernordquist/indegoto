@@ -1,28 +1,31 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <MapComponent msg="This is City Hall" :bikeData=bikeData />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MapComponent from './components/MapComponent.vue';
+
+// var fetchedBikeData = {};
+// fetch("https://www.rideindego.com/stations/json/").then(function(response) {
+//   return response.json();
+//   }).then(function(data) {
+//     fetchedBikeData = data;
+//     console.log(fetchedBikeData);
+//   });
+
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    MapComponent
+  },
+  data () {
+    return {
+      bikeData: {}
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
