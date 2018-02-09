@@ -16,3 +16,16 @@ html, body, #app {
 .gm-style-iw+div {
   display: none;
 }
+
+.infowindow > div {
+  display: inline-block;
+  text-align: center;
+}
+
+.bikesAvailable, .docksAvailable {
+  font-size: 2em;
+}
+
+.infowindow > :first-child {
+  margin-right: 1em;
+}
