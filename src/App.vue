@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MapComponent msg="This is City Hall"/>
+    <MapComponent msg="This is City Hall" :given-address='center'/>
   </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
   },
   data () {
     return {
+      center: {
+        lat: 39.9524,
+        latitude: 39.9524,
+        lng: -75.1636,
+        longitude: -75.1636}
     }
   }
 }

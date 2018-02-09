@@ -13,16 +13,22 @@ html, body, #app {
   color: #2c3e50;
 }
 
+.gm-style-iw {
+  margin-right: -1em;
+  margin-left: -1em;
+}
+
+/* hide close button on infowindows */
 .gm-style-iw+div {
   display: none;
 }
 
-.infowindow > div {
+.bikesAvailable, .docksAvailable {
   display: inline-block;
   text-align: center;
 }
 
-.bikesAvailable, .docksAvailable {
+.bikesAvailable > div, .docksAvailable > div {
   font-size: 2em;
 }
 

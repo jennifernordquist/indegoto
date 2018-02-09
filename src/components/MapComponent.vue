@@ -1,37 +1,47 @@
 <template>
-    <gmap-map
-    :center="center"
-    :zoom="15"
-    style="width: 100%; height: 100%"
-    v-if="stations.length > 0"
+  <gmap-map
+  :center="center"
+  :zoom="16"
+  style="width: 100%; height: 100%"
+  v-if="stations.length > 0"
+  > 
+  <gmap-marker 
+  :position.sync="center"
+  :clickable="true"
+  :draggable="false"
+  @g-click="center=givenAddress"
+  ></gmap-marker>
+  <gmap-info-window
+  v-for="(s, index) in stations"
+  :position="s.geometry.position"
+  :opened="true"
   >
-    <gmap-info-window
-    v-for="(s, index) in stations"
-    :position="s.geometry.position"
-    :opened="true"
-    >
-    <div class="infowindow">
+  <div class="infowindow">
+    <div class="bikesAvailable">
       <div>
-        <div class="bikesAvailable">
-          {{s.properties.bikesAvailable}}
-        </div>
+        {{s.properties.bikesAvailable}}
+      </div>
       bikes
-      </div>
-      <div>
-        <div class="docksAvailable">
-        {{s.properties.docksAvailable}}
-        </div>
-        docks
-      </div>
     </div>
-    </gmap-info-window>
-  </gmap-map>
+    <div class="docksAvailable">
+      <div>
+        {{s.properties.docksAvailable}}
+      </div>
+      docks
+    </div>
+    <div>
+      {{s.geometry.distance.toFixed(3)}} miles away
+    </div>
+  </div>
+</gmap-info-window>
+</gmap-map>
 </template>
 
 <script>
 import * as VueGoogleMaps from 'vue2-google-maps';
 import Vue from 'vue';
 import AsyncComputed from 'vue-async-computed'
+import Haversine from 'haversine'
 
 Vue.use(AsyncComputed);
 Vue.use(VueGoogleMaps, {
@@ -47,32 +57,41 @@ export default {
   name: 'MapComponent',
   props: {
     msg: String,
-    bikeData: Object
+    bikeData: Object,
+    givenAddress: Object
   },
   data () {
     return {
-      center: {lat: 39.9524, lng: -75.1636}
+      center: this.givenAddress
     }
   },
   asyncComputed: {
     stations: {
       get () {
-          return fetch("https://www.rideindego.com/stations/json/").then(function(response) { 
-          return response.json()}).then(function(data) {
+        var self = this;
+        return fetch("https://www.rideindego.com/stations/json/")
+          .then(function(response) { 
+            return response.json()
+          })
+          .then(function(data) {
             return data.features
-          }).then(function(data) {
+          })
+          .then(function(data) {
             data.forEach(function(station) {
               station.geometry.position = {
                 lng: station.geometry.coordinates[0],
+                longitude: station.geometry.coordinates[0],
+                latitude: station.geometry.coordinates[1],
                 lat: station.geometry.coordinates[1]
               }
+              station.geometry.distance = Haversine(self.givenAddress, station.geometry.position, {unit: 'mile'});
             })
             console.log(data);
             return data;
           })
-        },
-        default: []
-      }
+      },
+      default: []
+    }
   }
 }
 </script>
