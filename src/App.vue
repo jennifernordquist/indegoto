@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <DataPanel v-on:addressSubmit="updateAddress" :mapsLoaded="mapsIsLoaded"/>
+    <DataPanel v-on:addressSubmit="updateAddress" v-on:updateNumberOfStations="updateNumberOfStations" :mapsLoaded="mapsIsLoaded"/>
     <MapComponent msg="This is City Hall" :given-address='center' :num-stations='numberOfStations' v-on:mapsLoaded="mapsLoaded"/>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
         lng: -75.1636,
         longitude: -75.1636
       },
-      numberOfStations: 6,
+      numberOfStations: 3,
       mapsIsLoaded: false
     }
   },
@@ -34,6 +34,9 @@ export default {
     },
     updateAddress: function (address) {
       this.center = address;
+    },
+    updateNumberOfStations: function (num) {
+      this.numberOfStations = num;
     }
   }
 }

@@ -185,23 +185,30 @@ export default {
       );
     },
     updateShownStations: function () {
-      this.recentOrigin = this.givenAddress;
       var address = this.givenAddress;
-      this.stations.forEach(function(station) {
-        station.geometry.distance = Haversine(address, station.geometry.position, {unit: 'mile'});
-      })
-      this.stations.sort(function(a, b) {
-        if(a.geometry.distance < b.geometry.distance) {
-          return -1;
-        }
-        else if(a.geometry.distance === b.geometry.distance) {
-          return 0;
-        }
-        else {
-          return 1;
-        }
-      });
+      if(this.recentOrigin !== this.givenAddress) {
+        this.recentOrigin = this.givenAddress;
+        this.stations.forEach(function(station) {
+          station.geometry.distance = Haversine(address, station.geometry.position, {unit: 'mile'});
+        })
+        this.stations.sort(function(a, b) {
+          if(a.geometry.distance < b.geometry.distance) {
+            return -1;
+          }
+          else if(a.geometry.distance === b.geometry.distance) {
+            return 0;
+          }
+          else {
+            return 1;
+          }
+        });
+      }
       this.shownStations = this.stations.slice(0, this.numStations);
+    }
+  },
+  watch: {
+    numStations: function () {
+      this.updateShownStations();
     }
   },
   updated () {

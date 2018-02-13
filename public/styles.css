@@ -23,7 +23,11 @@ html, body, #app {
   font-family: Roboto, Arial, sans-serif;
   padding: 8px;
   border-radius: 2px;
-  /*font-weight: 500;*/
+  text-align: left;
+}
+
+#number-of-stations {
+  width: 2em;
 }
 
 .gm-style-iw {

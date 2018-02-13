@@ -8,8 +8,21 @@
     classname="form-control"
     placeholder="Enter an address"
     v-on:placechanged="getAddressData"
->
-</vue-google-autocomplete>
+    >
+    </vue-google-autocomplete>
+    <br/>
+    <label
+    for='number-of-stations'
+    >
+      Number of Stations Shown:
+    </label>
+    <input
+      id="number-of-stations"
+      ref="number-of-stations"
+      type="number"
+      value=3
+      v-on:change="updateNumberOfStations"
+      >
   </div>
 </template>
 
@@ -59,6 +72,9 @@
             longitude: addressData.longitude
           }
           this.$emit("addressSubmit", this.address);
+        },
+        updateNumberOfStations: function (input) {
+          this.$emit("updateNumberOfStations", parseInt(input.srcElement.value));
         }
     }
   }
