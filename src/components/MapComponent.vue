@@ -63,7 +63,8 @@ export default {
   },
   data () {
     return {
-      shownStations: []
+      shownStations: [],
+      recentOrigin: this.givenAddress
     }
   },
   asyncComputed: {
@@ -107,6 +108,31 @@ export default {
     }
   },
   methods: {
+    isEquivalent: function (a, b) {
+        // Create arrays of property names
+        var aProps = Object.getOwnPropertyNames(a);
+        var bProps = Object.getOwnPropertyNames(b);
+
+        // If number of properties is different,
+        // objects are not equivalent
+        if (aProps.length != bProps.length) {
+            return false;
+        }
+
+        for (var i = 0; i < aProps.length; i++) {
+            var propName = aProps[i];
+
+            // If values of same property are not equal,
+            // objects are not equivalent
+            if (a[propName] !== b[propName]) {
+                return false;
+            }
+        }
+
+        // If we made it this far, objects
+        // are considered equivalent
+        return true;
+    },
     getBounds: function () {
       var bounds = {}
       var stationsData = []
@@ -159,9 +185,10 @@ export default {
       );
     },
     updateShownStations: function () {
-      // var workingStations = this.stations;
+      this.recentOrigin = this.givenAddress;
+      var address = this.givenAddress;
       this.stations.forEach(function(station) {
-        station.geometry.distance = Haversine(this.givenAddress, station.geometry.position, {unit: 'mile'});
+        station.geometry.distance = Haversine(address, station.geometry.position, {unit: 'mile'});
       })
       this.stations.sort(function(a, b) {
         if(a.geometry.distance < b.geometry.distance) {
@@ -180,9 +207,10 @@ export default {
   updated () {
     var self = this;
     var map = this.$children[0];
-    // console.log(self);
     map.$mapCreated.then(function (){
+      if (!(self.isEquivalent(self.givenAddress, self.recentOrigin))) {
       self.updateShownStations();
+    }
       map.fitBounds(self.getBounds());
     });
   }
