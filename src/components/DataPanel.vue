@@ -1,18 +1,22 @@
 <template>
   <div class="data-panel">
-    <input
-    type="text"
+
+    <vue-google-autocomplete
+    v-if="mapsLoaded"
     id="address-bar"
     ref="address-bar"
+    classname="form-control"
     placeholder="Enter an address"
-    v-on:change="getAddressData"
-    />
+    v-on:placechanged="getAddressData"
+>
+</vue-google-autocomplete>
   </div>
 </template>
 
 <script>
   import Vue from 'vue';
   import * as VueGoogleMaps from 'vue2-google-maps';
+  import VueGoogleAutocomplete from 'vue-google-autocomplete'
 
   Vue.use(VueGoogleMaps, {
     load: {
@@ -24,16 +28,20 @@
   export default {
     name: 'DataPanel',
     props: {
+        mapsLoaded: Boolean
       // 
     },
     data () {
       return {
-        address: ''
+        address: {},
       }
     },
+    components: { VueGoogleAutocomplete },
 
-    mounted () {
-      this.$refs['address-bar'].focus();
+    updated () {
+      if(this.mapsLoaded) {
+        this.$refs['address-bar'].focus();
+      }
     },
 
     methods: {
@@ -44,7 +52,12 @@
         * @param {String} id Input container ID
         */
         getAddressData: function (addressData, placeResultData, id) {
-          this.address = addressData.srcElement.value;
+          this.address = {
+            lat: addressData.latitude,
+            latitude: addressData.latitude,
+            lng: addressData.longitude,
+            longitude: addressData.longitude
+          }
           this.$emit("addressSubmit", this.address);
         }
     }

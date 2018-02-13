@@ -208,6 +208,7 @@ export default {
     var self = this;
     var map = this.$children[0];
     map.$mapCreated.then(function (){
+      self.$emit("mapsLoaded")
       if (!(self.isEquivalent(self.givenAddress, self.recentOrigin))) {
       self.updateShownStations();
     }

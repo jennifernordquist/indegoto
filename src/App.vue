@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <DataPanel v-on:addressSubmit="updateAddress" />
-    <MapComponent msg="This is City Hall" :given-address='center' :num-stations='numberOfStations'/>
+    <DataPanel v-on:addressSubmit="updateAddress" :mapsLoaded="mapsIsLoaded"/>
+    <MapComponent msg="This is City Hall" :given-address='center' :num-stations='numberOfStations' v-on:mapsLoaded="mapsLoaded"/>
   </div>
 </template>
 
@@ -24,40 +24,16 @@ export default {
         lng: -75.1636,
         longitude: -75.1636
       },
-      numberOfStations: 6
+      numberOfStations: 6,
+      mapsIsLoaded: false
     }
   },
-  // watch: {
-  //   center: {
-  //     handler: function(newVal, oldVal) {},
-  //     deep: true
-  //   }
-  // },
   methods: {
+    mapsLoaded: function () {
+      this.mapsIsLoaded = true;
+    },
     updateAddress: function (address) {
-      var self = this;
-
-      
-      if (typeof(geocoder) == 'undefined') {
-       var geocoder = new google.maps.Geocoder();
-      }
-      console.log(address);
-      geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          var loc = results[0].geometry.location;
-          const center = {
-            lat: loc.lat(),
-            latitude: loc.lat(),
-            lng: loc.lng(),
-            longitude: loc.lng()
-          };
-          self.center = center;
-          // self.center = 
-          // Vue.set(this, 'center', center);
-        } else {
-          console.log("Geocoder status: " + status);
-        }
-      });
+      this.center = address;
     }
   }
 }
