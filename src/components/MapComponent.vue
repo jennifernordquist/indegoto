@@ -1,12 +1,12 @@
 <template>
   <gmap-map
-  :center="center"
+  :center="givenAddress"
   :zoom="17"
   style="width: 100%; height: 100%"
   v-if="stations.length > 0"
   > 
   <gmap-marker 
-  :position.sync="center"
+  :position.sync="givenAddress"
   :clickable="true"
   :draggable="false"
   @g-click="center=givenAddress"
@@ -38,16 +38,16 @@
 </template>
 
 <script>
-import * as VueGoogleMaps from 'vue2-google-maps';
 import Vue from 'vue';
+import * as VueGoogleMaps from 'vue2-google-maps';
 import AsyncComputed from 'vue-async-computed'
 import Haversine from 'haversine'
 
 Vue.use(AsyncComputed);
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyAlfIPueH1ILDGeT2z_neVtoDe6NW4_g2I'
-      // libraries: 'places', //// If you need to use place input
+    key: 'AIzaSyAlfIPueH1ILDGeT2z_neVtoDe6NW4_g2I',
+    libraries: 'places' //// If you need to use place input
     }
   });
 
@@ -63,7 +63,6 @@ export default {
   },
   data () {
     return {
-      center: this.givenAddress,
       shownStations: []
     }
   },
@@ -158,12 +157,33 @@ export default {
         new google.maps.LatLng(bounds.south, bounds.west),
         new google.maps.LatLng(bounds.north, bounds.east)
       );
+    },
+    updateShownStations: function () {
+      // var workingStations = this.stations;
+      this.stations.forEach(function(station) {
+        station.geometry.distance = Haversine(this.givenAddress, station.geometry.position, {unit: 'mile'});
+      })
+      this.stations.sort(function(a, b) {
+        if(a.geometry.distance < b.geometry.distance) {
+          return -1;
+        }
+        else if(a.geometry.distance === b.geometry.distance) {
+          return 0;
+        }
+        else {
+          return 1;
+        }
+      });
+      this.shownStations = this.stations.slice(0, this.numStations);
     }
   },
   updated () {
     var self = this;
-    this.$children[0].$mapCreated.then(function (){
-      self.$children[0].fitBounds(self.getBounds());
+    var map = this.$children[0];
+    // console.log(self);
+    map.$mapCreated.then(function (){
+      self.updateShownStations();
+      map.fitBounds(self.getBounds());
     });
   }
 }

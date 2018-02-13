@@ -13,6 +13,19 @@ html, body, #app {
   color: #2c3e50;
 }
 
+.data-panel {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  z-index: 1;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; 
+  font-family: Roboto, Arial, sans-serif;
+  padding: 8px;
+  border-radius: 2px;
+  /*font-weight: 500;*/
+}
+
 .gm-style-iw {
   /**/
 }
