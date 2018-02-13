@@ -1,13 +1,13 @@
 <template>
-  <div class="data-panel">
+  <div class='data-panel'>
 
     <vue-google-autocomplete
-    v-if="mapsLoaded"
-    id="address-bar"
-    ref="address-bar"
-    classname="form-control"
-    placeholder="Enter an address"
-    v-on:placechanged="getAddressData"
+    v-if='mapsLoaded'
+    id='address-bar'
+    ref='address-bar'
+    classname='form-control'
+    placeholder='Enter an address'
+    v-on:placechanged='getAddressData'
     >
     </vue-google-autocomplete>
     <br/>
@@ -17,11 +17,11 @@
       Number of Stations Shown:
     </label>
     <input
-      id="number-of-stations"
-      ref="number-of-stations"
-      type="number"
+      id='number-of-stations'
+      ref='number-of-stations'
+      type='number'
       value=3
-      v-on:change="updateNumberOfStations"
+      v-on:change='updateNumberOfStations'
       >
   </div>
 </template>
@@ -71,10 +71,10 @@
             lng: addressData.longitude,
             longitude: addressData.longitude
           }
-          this.$emit("addressSubmit", this.address);
+          this.$emit('addressSubmit', this.address);
         },
         updateNumberOfStations: function (input) {
-          this.$emit("updateNumberOfStations", parseInt(input.srcElement.value));
+          this.$emit('updateNumberOfStations', parseInt(input.srcElement.value));
         }
     }
   }

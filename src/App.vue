@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <DataPanel v-on:addressSubmit="updateAddress" v-on:updateNumberOfStations="updateNumberOfStations" :mapsLoaded="mapsIsLoaded"/>
-    <MapComponent msg="This is City Hall" :given-address='center' :num-stations='numberOfStations' v-on:mapsLoaded="mapsLoaded"/>
+  <div id='app'>
+    <DataPanel v-on:addressSubmit='updateAddress' v-on:updateNumberOfStations='updateNumberOfStations' :mapsLoaded='mapsIsLoaded'/>
+    <MapComponent msg='This is City Hall' :given-address='center' :num-stations='numberOfStations' v-on:mapsLoaded='mapsLoaded'/>
   </div>
 </template>
 
