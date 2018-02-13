@@ -140,9 +140,8 @@ export default {
       this.shownStations.forEach(function (s) {
         stationsData.push(s.geometry.position);
       });
-      const shownPts = [this.givenAddress].concat(stationsData);
-
-      return makeGoogleBounds(shownPts);
+      // const shownPts = [this.givenAddress].concat(stationsData);
+      return makeGoogleBounds(this.givenAddress, stationsData);
     },
     updateShownStations: function () {
       var address = this.givenAddress;

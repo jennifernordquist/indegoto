@@ -26,6 +26,13 @@ html, body, #app {
   text-align: left;
 }
 
+#address-bar {
+  width: -moz-calc(100% - 6px);
+  width: -webkit-calc(100% - 6px);
+  width: -o-calc(100% - 6px);
+  width: calc(100% - 6px);
+}
+
 #number-of-stations {
   width: 2em;
 }
