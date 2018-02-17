@@ -23,13 +23,17 @@
       value=3
       v-on:change='updateNumberOfStations'
       >
+      <weather-panel>
+      </weather-panel>
+
   </div>
 </template>
 
 <script>
   import Vue from 'vue';
   import * as VueGoogleMaps from 'vue2-google-maps';
-  import VueGoogleAutocomplete from 'vue-google-autocomplete'
+  import VueGoogleAutocomplete from 'vue-google-autocomplete';
+  import WeatherPanel from '../components/WeatherPanel.vue';
 
   Vue.use(VueGoogleMaps, {
     load: {
@@ -49,7 +53,10 @@
         address: {},
       }
     },
-    components: { VueGoogleAutocomplete },
+    components: {
+      VueGoogleAutocomplete,
+      WeatherPanel
+    },
 
     updated () {
       if(this.mapsLoaded) {
