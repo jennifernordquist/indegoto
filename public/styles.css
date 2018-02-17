@@ -31,6 +31,7 @@ html, body, #app {
   width: -webkit-calc(100% - 6px);
   width: -o-calc(100% - 6px);
   width: calc(100% - 6px);
+  margin-bottom: .5em;
 }
 
 #number-of-stations {

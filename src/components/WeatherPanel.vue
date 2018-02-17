@@ -8,7 +8,7 @@
   >
   <div>
     <span class='temp'>
-      {{temp + '°'}}
+      {{temp + '°F'}}
     </span>
 
     {{weather.weather[0].description}}
