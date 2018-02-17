@@ -37,6 +37,21 @@ html, body, #app {
   width: 2em;
 }
 
+.weather-panel>img {
+  display: inline-block;
+}
+
+.temp {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.weather-panel>div {
+  display: inline-block;
+  line-height: 50px;
+  vertical-align: top;
+}
+
 .gm-style-iw {
   /**/
 }

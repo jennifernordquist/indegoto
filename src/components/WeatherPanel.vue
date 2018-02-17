@@ -1,12 +1,18 @@
 <template>
   <div
-  class="weather-panel"
-  v-if="weather.weather"
+  class='weather-panel'
+  v-if='weather.weather'
   >
   <img
   :src='iconURL'
   >
-  {{weather.weather[0].description}}
+  <div>
+    <span class='temp'>
+      {{temp + '°'}}
+    </span>
+
+    {{weather.weather[0].description}}
+  </div>
 </div>
 </template>
 
@@ -14,6 +20,7 @@
   import Vue from 'vue';
   import AsyncComputed from 'vue-async-computed';
   import getWeather from '../lib/getWeather';
+  import getTempInF from '../lib/getTempInF';
 
   export default {
     name: 'WeatherPanel',
@@ -22,7 +29,8 @@
     },
     data () {
       return {
-        iconURL: ""
+        iconURL: "",
+        temp: 0
       }
     },
     asyncComputed: {
@@ -30,6 +38,7 @@
         get () {
           var data = getWeather();
           this.iconURL = 'https://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
+          this.temp = getTempInF(data.main.temp).toFixed(1);
           console.log(data);
           return data;
         },
