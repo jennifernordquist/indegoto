@@ -32,6 +32,12 @@ html, body, #app {
   width: -o-calc(100% - 6px);
   width: calc(100% - 6px);
   margin-bottom: .5em;
+  font-size: 1em;
+}
+
+.data-panel > label {
+  font-size: 1em;
+  line-height: 1.5em;
 }
 
 #number-of-stations {
@@ -76,12 +82,15 @@ html, body, #app {
   height: 1.5em;
   width: 100%;
   padding-left: 2px;
-  padding-right: 2px;
+  margin-right: 2px;
+  font-weight: bold;
+  text-align: center;
 
 }
 
 .weather-panel>.warning-green {
   background-color: #4CAF50;
+  color: rgba(255, 255, 255, .9);
 }
 
 .weather-panel>.warning-yellow {
@@ -90,10 +99,12 @@ html, body, #app {
 
 .weather-panel>.warning-red {
   background-color: #F44336;
+  color: white;
 }
 
 .weather-panel>.warning-blue {
   background-color: #2196F3;
+  color: white;
 }
 .gm-style-iw {
   /**/
