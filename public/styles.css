@@ -40,11 +40,27 @@ html, body, #app {
 
 .weather-panel>img {
   display: inline-block;
+  margin-right: .125em;
 }
+
+
 
 .temp {
   font-size: 2em;
   font-weight: bold;
+  margin-right: .25em;
+}
+
+.wind {
+  height: 1em;
+  line-height: 1em;
+  font-size: .75em;
+  margin-top: .75em;
+}
+
+.description {
+  height: 1.5em;
+  line-height: 1.5em;
 }
 
 .weather-panel>div {
@@ -53,6 +69,32 @@ html, body, #app {
   vertical-align: top;
 }
 
+.weather-panel>.warning-green, .weather-panel>.warning-yellow, .weather-panel>.warning-red, .weather-panel>.warning-blue {
+  display: block;
+  font-size: 1em;
+  line-height: 1.5em;
+  height: 1.5em;
+  width: 100%;
+  padding-left: 2px;
+  padding-right: 2px;
+
+}
+
+.weather-panel>.warning-green {
+  background-color: #4CAF50;
+}
+
+.weather-panel>.warning-yellow {
+  background-color: #FFEB3B;
+}
+
+.weather-panel>.warning-red {
+  background-color: #F44336;
+}
+
+.weather-panel>.warning-blue {
+  background-color: #2196F3;
+}
 .gm-style-iw {
   /**/
 }
