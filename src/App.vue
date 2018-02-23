@@ -10,6 +10,7 @@ import Vue from 'vue';
 import MapComponent from './components/MapComponent.vue';
 import DataPanel from './components/DataPanel.vue';
 
+
 export default {
   name: 'app',
   components: {

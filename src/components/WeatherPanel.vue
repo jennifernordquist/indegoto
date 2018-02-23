@@ -52,13 +52,9 @@
       weather: {
         get () {
           var data = getWeather();
-          console.log(data);
-          this.iconURL = 'https://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
-          this.temp = Units.getTempInF(data.main.temp).toFixed(1);
-          this.speed = Units.getSpeedInMPH(data.wind.speed).toFixed(1);
-          this.threatLevel = safeToBike(data);
-          this.setWarning();
+          // console.log(typeof data);
           // console.log(data);
+          this.setupWeather(data);
           return data;
         },
         default: {}
@@ -66,6 +62,13 @@
       //
     },
     methods: {
+      setupWeather: function (data) {
+        this.iconURL = 'https://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
+        this.temp = Units.getTempInF(data.main.temp).toFixed(1);
+        this.speed = Units.getSpeedInMPH(data.wind.speed).toFixed(1);
+        this.threatLevel = safeToBike(data);
+        this.setWarning();
+      },
       setWarning: function () {
         if (this.threatLevel === 3) {
           this.warningClass = 'warning-red';
