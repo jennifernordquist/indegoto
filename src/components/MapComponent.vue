@@ -1,36 +1,39 @@
 <template>
   <gmap-map
-  :center="givenAddress"
-  :zoom="17"
-  style="width: 100%; height: 100%"
-  v-if="stations.length > 0"
+  :center='givenAddress'
+  :zoom='17'
+  style='width: 100%; height: 100%'
+  v-if='stations.length > 0'
   > 
   <gmap-marker 
-  :position.sync="givenAddress"
-  :clickable="true"
-  :draggable="false"
-  @g-click="center=givenAddress"
+  :position.sync='givenAddress'
+  :clickable='true'
+  :draggable='false'
+  @g-click='center=givenAddress'
   ></gmap-marker>
   <gmap-info-window
-  v-for="(s, index) in shownStations"
-  :position="s.geometry.position"
-  :opened="true"
+  v-for='(s, index) in shownStations'
+  :position='s.geometry.position'
+  :opened='true'
   >
-  <div class="infowindow">
-    <div class="bikesAvailable">
+  <div class='infowindow'>
+    <div class='bikesAvailable'>
       <div>
         {{s.properties.bikesAvailable}}
       </div>
       bikes
     </div>
-    <div class="docksAvailable">
+    <div class='docksAvailable'>
       <div>
         {{s.properties.docksAvailable}}
       </div>
       docks
     </div>
-    <div>
+    <div class='iw-distance'>
       {{s.geometry.distance.toFixed(3)}} miles away
+    </div>
+    <div class='iw-address'>
+      {{s.properties.addressStreet}}
     </div>
   </div>
 </gmap-info-window>
@@ -101,7 +104,7 @@ export default {
               }
             });
             self.shownStations = data.slice(0, self.numStations);
-            // console.log(data);
+            console.log(data);
             return data;
           })
       },

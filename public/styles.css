@@ -127,3 +127,11 @@ html, body, #app {
 .infowindow > :first-child {
   margin-right: 1em;
 }
+
+.iw-distance, .iw-address {
+  font-size: smaller;
+}
+
+.iw-address {
+  max-width: 9em;
+}
