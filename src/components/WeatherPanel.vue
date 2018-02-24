@@ -1,8 +1,5 @@
-<template>
-  <div
-  class='weather-panel'
-  v-if='weather.weather'
-  >
+<template v-if='weather'>
+  <div class='weather-panel'>
     <img
     :src='iconURL'
     >
@@ -14,7 +11,7 @@
         {{speed}} mph winds
       </div>
       <div class='description'>
-        {{weather.weather[0].description}}
+        {{description}}
       </div>
     </div>
     <div :class=warningClass>
@@ -26,12 +23,9 @@
 
 <script>
   import Vue from 'vue';
-  import AsyncComputed from 'vue-async-computed';
   import getWeather from '../lib/getWeather';
   import Units from '../lib/Units';
   import safeToBike from '../lib/safeToBike';
-
- 
 
   export default {
     name: 'WeatherPanel',
@@ -45,21 +39,10 @@
         speed: 0,
         threatLevel: 0,
         warningClass: '',
-        warningText: ''
+        warningText: '',
+        weather: undefined,
+        description: ''
       }
-    },
-    asyncComputed: {
-      weather: {
-        get () {
-          var data = getWeather();
-          // console.log(typeof data);
-          // console.log(data);
-          this.setupWeather(data);
-          return data;
-        },
-        default: {}
-      }
-      //
     },
     methods: {
       setupWeather: function (data) {
@@ -67,6 +50,8 @@
         this.temp = Units.getTempInF(data.main.temp).toFixed(1);
         this.speed = Units.getSpeedInMPH(data.wind.speed).toFixed(1);
         this.threatLevel = safeToBike(data);
+        this.weather = data;
+        this.description = this.weather.weather[0].description;
         this.setWarning();
       },
       setWarning: function () {
@@ -89,6 +74,12 @@
         }
         return;
       }
+    },
+    mounted: function() {
+      var self = this;
+      getWeather().then(function (val) {
+        self.setupWeather(val);
+      });
     }
   };
 

@@ -104,7 +104,7 @@ export default {
               }
             });
             self.shownStations = data.slice(0, self.numStations);
-            console.log(data);
+            // console.log(data);
             return data;
           })
       },

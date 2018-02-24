@@ -1,9 +1,9 @@
 export default function () {
   const localStorage = window.localStorage;
   var data;
-  const tenMinutes = 1000*60*10
+  const tenMinutes = 1000*60*10;
   if(localStorage.getItem('weatherResponse') &&  (Date.now() - localStorage.getItem('responseTimestamp')) < tenMinutes) {
-    data = JSON.parse(localStorage.getItem('weatherResponse'));
+    data = Promise.resolve(JSON.parse(localStorage.getItem('weatherResponse')));
     console.log("Logged at " + new Date(parseInt(localStorage.getItem('responseTimestamp'), 10)));
   }
   else {
@@ -12,12 +12,14 @@ export default function () {
         var data = response.json();
         return data;
       })
-      .then(function(data){
+      .then(function (data) {
         localStorage.setItem('weatherResponse', JSON.stringify(data));
         localStorage.setItem('responseTimestamp', Date.now());
-    }, function( error) {
+        return data;
+      })
+      .catch(function (error) {
         console.log(error);
-    });
+      });
     console.log("Last logged at " + new Date(parseInt(localStorage.getItem('responseTimestamp'), 10)).toString());
     localStorage.setItem('responseTimestamp', Date.now());
   
