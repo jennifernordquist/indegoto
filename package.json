@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "start": "node server.js"
   },
   "dependencies": {
     "dns": "^0.2.2",
+    "express": "^4.16.2",
     "fetch": "^1.1.0",
     "haversine": "^1.1.0",
     "vue": "^2.5.13",

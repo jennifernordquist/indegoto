@@ -1,0 +1,190 @@
+html, body, #app {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.data-panel {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  z-index: 1;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1>divpx; 
+  font-family: Roboto, Arial, sans-serif;
+  padding: 8px;
+  border-radius: 2px;
+  text-align: left;
+}
+
+#address-bar {
+  width: -moz-calc(100% - 6px);
+  width: -webkit-calc(100% - 6px);
+  width: -o-calc(100% - 6px);
+  width: calc(100% - 6px);
+  margin-bottom: .5em;
+  font-size: 1em;
+}
+
+.data-panel > label {
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+#number-of-stations {
+  width: 2em;
+}
+
+.weather-panel>img {
+  display: inline-block;
+  margin-right: .125em;
+}
+
+
+
+.temp {
+  font-size: 2em;
+  font-weight: bold;
+  margin-right: .25em;
+}
+
+.wind {
+  height: 1em;
+  line-height: 1em;
+  font-size: .75em;
+  margin-top: .75em;
+}
+
+.description {
+  height: 1.5em;
+  line-height: 1.5em;
+}
+
+.weather-panel>div {
+  display: inline-block;
+  line-height: 50px;
+  vertical-align: top;
+}
+
+.weather-panel>.warning-green, .weather-panel>.warning-yellow, .weather-panel>.warning-red, .weather-panel>.warning-blue {
+  display: block;
+  font-size: 1em;
+  line-height: 1.5em;
+  height: 1.5em;
+  width: 100%;
+  padding-left: 2px;
+  margin-right: 2px;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+.weather-panel>.warning-green {
+  background-color: #4CAF50;
+  color: rgba(255, 255, 255, .9);
+}
+
+.weather-panel>.warning-yellow {
+  background-color: #FFEB3B;
+}
+
+.weather-panel>.warning-red {
+  background-color: #F44336;
+  color: white;
+}
+
+.weather-panel>.warning-blue {
+  background-color: #2196F3;
+  color: white;
+}
+.gm-style-iw {
+  /**/
+}
+
+/* hide close button on infowindows */
+.gm-style-iw+div {
+  display: none;
+}
+
+.bikesAvailable, .docksAvailable {
+  display: inline-block;
+  text-align: center;
+}
+
+.bikesAvailable > div, .docksAvailable > div {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.infowindow > :first-child {
+  margin-right: 1em;
+}
+
+.iw-distance, .iw-address {
+  font-size: smaller;
+}
+
+.iw-address {
+  max-width: 9em;
+}
+
+.level-1>div {
+  color: #d32f2f;
+}
+
+.level-2>div {
+  color: #d94a31;
+}
+
+.level-3>div {
+  color: #e06633;
+}
+
+.level-4>div {
+  color: #e58335;
+}
+
+.level-5>div {
+  color: #eba137;
+}
+
+.level-6>div {
+  color: #f2c739;
+}
+
+.level-7>div {
+  color: #ffeb3b;
+}
+
+.level-8>div {
+  color: #c1df3d;
+}
+
+.level-9>div {
+  color: #91ca3e;
+}
+
+.level-10>div {
+  color: #77bc3d;
+}
+
+.level-11>div {
+  color: #55a83c;
+}
+
+.level-12>div {
+  color: #429a3a;
+}
+
+.level-13>div {
+  color: #388e3c;
+}
