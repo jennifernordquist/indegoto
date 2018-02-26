@@ -92,14 +92,6 @@ export default {
               }
 
               station.geometry.distance = Haversine(self.givenAddress, station.geometry.position, {unit: 'mile'});
-
-
-              const levels = 13;
-              const docks = station.properties.totalDocks;
-              station.relativeNums = {
-                bikes: (station.properties.bikesAvailable / docks * levels).toFixed(0),
-                docks: (station.properties.docksAvailable / docks * levels).toFixed(0)
-              };
             })
             data.sort(function(a, b) {
               if(a.geometry.distance < b.geometry.distance) {
@@ -123,10 +115,12 @@ export default {
   },
   methods: {
     shownColors: function () {
+      const levels = 13;
       this.shownStations.forEach(function (station) {
+        const docks = station.properties.totalDocks;
         station.classes = {
-          bikes: 'bikesAvailable level-'.concat(station.relativeNums.bikes),
-          docks: 'docksAvailable level-'.concat(station.relativeNums.docks)
+          bikes: 'bikesAvailable level-'.concat(Math.max((station.properties.bikesAvailable / docks * levels).toFixed(0), 1)),
+          docks: 'docksAvailable level-'.concat(Math.max((station.properties.docksAvailable / docks * levels).toFixed(0), 1))
         };
       })
     },
