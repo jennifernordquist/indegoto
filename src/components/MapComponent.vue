@@ -17,13 +17,13 @@
   :opened='true'
   >
   <div class='infowindow'>
-    <div class='bikesAvailable'>
+    <div :class='s.classes.bikes'>
       <div>
         {{s.properties.bikesAvailable}}
       </div>
       bikes
     </div>
-    <div class='docksAvailable'>
+    <div :class='s.classes.docks'>
       <div>
         {{s.properties.docksAvailable}}
       </div>
@@ -90,7 +90,16 @@ export default {
                 latitude: station.geometry.coordinates[1],
                 lat: station.geometry.coordinates[1]
               }
+
               station.geometry.distance = Haversine(self.givenAddress, station.geometry.position, {unit: 'mile'});
+
+
+              const levels = 13;
+              const docks = station.properties.totalDocks;
+              station.relativeNums = {
+                bikes: (station.properties.bikesAvailable / docks * levels).toFixed(0),
+                docks: (station.properties.docksAvailable / docks * levels).toFixed(0)
+              };
             })
             data.sort(function(a, b) {
               if(a.geometry.distance < b.geometry.distance) {
@@ -104,6 +113,7 @@ export default {
               }
             });
             self.shownStations = data.slice(0, self.numStations);
+            self.shownColors();
             // console.log(data);
             return data;
           })
@@ -112,6 +122,14 @@ export default {
     }
   },
   methods: {
+    shownColors: function () {
+      this.shownStations.forEach(function (station) {
+        station.classes = {
+          bikes: 'bikesAvailable level-'.concat(station.relativeNums.bikes),
+          docks: 'docksAvailable level-'.concat(station.relativeNums.docks)
+        };
+      })
+    },
     isEquivalent: function (a, b) {
         // Create arrays of property names
         var aProps = Object.getOwnPropertyNames(a);
@@ -165,6 +183,7 @@ export default {
         });
       }
       this.shownStations = this.stations.slice(0, this.numStations);
+      this.shownColors();
     }
   },
   watch: {

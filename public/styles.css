@@ -19,7 +19,7 @@ html, body, #app {
   left: 10px;
   z-index: 1;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; 
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1>divpx; 
   font-family: Roboto, Arial, sans-serif;
   padding: 8px;
   border-radius: 2px;
@@ -122,6 +122,7 @@ html, body, #app {
 
 .bikesAvailable > div, .docksAvailable > div {
   font-size: 2em;
+  font-weight: bold;
 }
 
 .infowindow > :first-child {
@@ -134,4 +135,56 @@ html, body, #app {
 
 .iw-address {
   max-width: 9em;
+}
+
+.level-1>div {
+  color: #d32f2f;
+}
+
+.level-2>div {
+  color: #d94a31;
+}
+
+.level-3>div {
+  color: #e06633;
+}
+
+.level-4>div {
+  color: #e58335;
+}
+
+.level-5>div {
+  color: #eba137;
+}
+
+.level-6>div {
+  color: #f2c739;
+}
+
+.level-7>div {
+  color: #ffeb3b;
+}
+
+.level-8>div {
+  color: #c1df3d;
+}
+
+.level-9>div {
+  color: #91ca3e;
+}
+
+.level-10>div {
+  color: #77bc3d;
+}
+
+.level-11>div {
+  color: #55a83c;
+}
+
+.level-12>div {
+  color: #429a3a;
+}
+
+.level-13>div {
+  color: #388e3c;
 }
