@@ -75,7 +75,7 @@ export default {
     stations: {
       get () {
         var self = this;
-        return fetch("https://www.rideindego.com/stations/json/")
+        return fetch('https://www.rideindego.com/stations/json/')
           .then(function(response) { 
             return response.json()
           })
@@ -195,7 +195,7 @@ export default {
     var self = this;
     var map = this.$children[0];
     map.$mapCreated.then(function (){
-      self.$emit("mapsLoaded")
+      self.$emit('mapsLoaded')
       if (!(self.isEquivalent(self.givenAddress, self.recentOrigin))) {
       self.updateShownStations();
     }

@@ -34,7 +34,7 @@
     },
     data () {
       return {
-        iconURL: "",
+        iconURL: '',
         temp: 0,
         speed: 0,
         threatLevel: 0,
