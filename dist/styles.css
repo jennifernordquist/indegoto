@@ -19,7 +19,7 @@ html, body, #app {
   left: 10px;
   z-index: 1;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1>divpx; 
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; 
   font-family: Roboto, Arial, sans-serif;
   padding: 8px;
   border-radius: 2px;
@@ -48,8 +48,6 @@ html, body, #app {
   display: inline-block;
   margin-right: .125em;
 }
-
-
 
 .temp {
   font-size: 2em;
@@ -85,7 +83,6 @@ html, body, #app {
   margin-right: 2px;
   font-weight: bold;
   text-align: center;
-
 }
 
 .weather-panel>.warning-green {
@@ -105,9 +102,6 @@ html, body, #app {
 .weather-panel>.warning-blue {
   background-color: #2196F3;
   color: white;
-}
-.gm-style-iw {
-  /**/
 }
 
 /* hide close button on infowindows */
@@ -137,6 +131,7 @@ html, body, #app {
   max-width: 9em;
 }
 
+/* color levels for color coded text */
 .level-1>div {
   color: #d32f2f;
 }
