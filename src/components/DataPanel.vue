@@ -2,18 +2,18 @@
   <div class='data-panel'>
 
     <vue-google-autocomplete
-    v-if='mapsLoaded'
-    id='address-bar'
-    ref='address-bar'
-    classname='form-control'
-    placeholder='Enter an address'
-    v-on:placechanged='getAddressData'
+      v-if='mapsLoaded'
+      id='address-bar'
+      ref='address-bar'
+      classname='form-control'
+      placeholder='Enter an address'
+      v-on:placechanged='getAddressData'
     >
     </vue-google-autocomplete>
     <br/>
     <label
-    for='number-of-stations'
-    >
+      for='number-of-stations'
+     >
       Number of Stations Shown:
     </label>
     <input
@@ -23,8 +23,7 @@
       value=3
       v-on:change='updateNumberOfStations'
       >
-      <weather-panel>
-      </weather-panel>
+      <weather-panel/>
 
   </div>
 </template>
@@ -39,14 +38,13 @@
     load: {
       key: 'AIzaSyAlfIPueH1ILDGeT2z_neVtoDe6NW4_g2I',
       libraries: 'places' //// If you need to use place input
-      }
-    });
+    }
+  });
 
   export default {
     name: 'DataPanel',
     props: {
         mapsLoaded: Boolean
-      // 
     },
     data () {
       return {
@@ -57,7 +55,6 @@
       VueGoogleAutocomplete,
       WeatherPanel
     },
-
     updated () {
       if(this.mapsLoaded) {
         this.$refs['address-bar'].focus();

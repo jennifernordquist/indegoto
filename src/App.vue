@@ -19,7 +19,7 @@ export default {
   },
   data () {
     return {
-      center: {
+      center: { // Philaelphia City Hall
         lat: 39.9524,
         latitude: 39.9524,
         lng: -75.1636,

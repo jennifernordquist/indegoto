@@ -1,42 +1,42 @@
 <template>
   <gmap-map
-  :center='givenAddress'
-  :zoom='17'
-  style='width: 100%; height: 100%'
-  v-if='stations.length > 0'
-  > 
-  <gmap-marker 
-  :position.sync='givenAddress'
-  :clickable='true'
-  :draggable='false'
-  @g-click='center=givenAddress'
-  ></gmap-marker>
-  <gmap-info-window
-  v-for='(s, index) in shownStations'
-  :position='s.geometry.position'
-  :opened='true'
-  >
-  <div class='infowindow'>
-    <div :class='s.classes.bikes'>
-      <div>
-        {{s.properties.bikesAvailable}}
+    :center='givenAddress'
+    :zoom='17'
+    style='width: 100%; height: 100%'
+    v-if='stations.length > 0'
+    > 
+    <gmap-marker 
+    :position.sync='givenAddress'
+    :clickable='true'
+    :draggable='false'
+    @g-click='center=givenAddress'
+    ></gmap-marker>
+    <gmap-info-window
+    v-for='(s, index) in shownStations'
+    :position='s.geometry.position'
+    :opened='true'
+    >
+    <div class='infowindow'>
+      <div :class='s.classes.bikes'>
+        <div>
+          {{s.properties.bikesAvailable}}
+        </div>
+        bikes
       </div>
-      bikes
-    </div>
-    <div :class='s.classes.docks'>
-      <div>
-        {{s.properties.docksAvailable}}
+      <div :class='s.classes.docks'>
+        <div>
+          {{s.properties.docksAvailable}}
+        </div>
+        docks
       </div>
-      docks
+      <div class='iw-distance'>
+        {{s.geometry.distance.toFixed(3)}} miles away
+      </div>
+      <div class='iw-address'>
+        {{s.properties.addressStreet}}
+      </div>
     </div>
-    <div class='iw-distance'>
-      {{s.geometry.distance.toFixed(3)}} miles away
-    </div>
-    <div class='iw-address'>
-      {{s.properties.addressStreet}}
-    </div>
-  </div>
-</gmap-info-window>
+  </gmap-info-window>
 </gmap-map>
 </template>
 
@@ -51,7 +51,7 @@ Vue.use(AsyncComputed);
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAlfIPueH1ILDGeT2z_neVtoDe6NW4_g2I',
-    libraries: 'places' //// If you need to use place input
+    libraries: 'places'
     }
   });
 
@@ -92,7 +92,7 @@ export default {
               }
 
               station.geometry.distance = Haversine(self.givenAddress, station.geometry.position, {unit: 'mile'});
-            })
+            });
             data.sort(function(a, b) {
               if(a.geometry.distance < b.geometry.distance) {
                 return -1;
@@ -163,7 +163,7 @@ export default {
         this.recentOrigin = this.givenAddress;
         this.stations.forEach(function(station) {
           station.geometry.distance = Haversine(address, station.geometry.position, {unit: 'mile'});
-        })
+        });
         this.stations.sort(function(a, b) {
           if(a.geometry.distance < b.geometry.distance) {
             return -1;
